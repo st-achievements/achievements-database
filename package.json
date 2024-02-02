@@ -1,0 +1,74 @@
+{
+  "name": "@st-achievements/database",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/st-achievements/achievements-database#readme",
+  "bugs": {
+    "url": "https://github.com/st-achievements/achievements-database/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/st-achievements/achievements-database.git"
+  },
+  "license": "MIT",
+  "author": "stLmpp",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE.md",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "migration:build": "node esbuild.config.js",
+    "migration:generate": "drizzle-kit generate:pg",
+    "migration:push": "drizzle-kit push:pg",
+    "migration:run": "node dist/migration.js",
+    "test": "vitest run",
+    "test:ci": "vitest run --bail 1",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest -w"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.3.1",
+    "camelcase": "^8.0.0",
+    "dotenv": "^16.4.1",
+    "drizzle-orm": "~0.29.3"
+  },
+  "devDependencies": {
+    "@st-api/config": "~1.1.0",
+    "@types/node": "~20.11.13",
+    "@types/pg": "^8.11.0",
+    "@typescript-eslint/eslint-plugin": "~6.20.0",
+    "@typescript-eslint/parser": "~6.20.0",
+    "drizzle-kit": "~0.20.13",
+    "esbuild": "~0.20.0",
+    "eslint": "~8.56.0",
+    "eslint-import-resolver-typescript": "~3.6.0",
+    "eslint-plugin-import": "~2.29.1",
+    "eslint-plugin-unicorn": "~50.0.1",
+    "fast-glob": "~3.3.2",
+    "pg": "^8.11.3",
+    "prettier": "~3.2.4",
+    "rimraf": "~5.0.5",
+    "tsup": "~8.0.1",
+    "tsx": "~4.7.0",
+    "type-fest": "^4.10.2",
+    "typescript": "~5.3.3",
+    "vitest": "~1.2.2"
+  },
+  "packageManager": "pnpm@8.14.0",
+  "engines": {
+    "node": "20"
+  }
+}

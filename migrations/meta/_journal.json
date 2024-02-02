@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1706838607895,
+      "tag": "0000_panoramic_rattler",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706840977310,
+      "tag": "0001_uneven_night_nurse",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706874380938,
+      "tag": "0002_petite_rattler",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706874429222,
+      "tag": "0003_previous_tattoo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1706874565120,
+      "tag": "0004_modern_gamma_corps",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+name: Run migrations on production database
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Build-and-create-PR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Install Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: true
+      - name: Build
+        run: pnpm migration:build
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm migration:run

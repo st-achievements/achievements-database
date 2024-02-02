@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["vitest/globals", "vitest.d.ts"],
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noEmit": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["*.js"]
+}
