@@ -1,5 +1,10 @@
 -- triggers
-CREATE EXTENSION moddatetime;
+DO $$ BEGIN
+  CREATE EXTENSION moddatetime;
+EXCEPTION
+  WHEN OTHERS THEN null;
+END $$;
+
 
 CREATE TRIGGER achievement_updated_at
     BEFORE UPDATE ON ach.achievement

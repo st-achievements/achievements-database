@@ -1,6 +1,6 @@
 {
-  "id": "12b85b60-aa6a-42ed-941b-c2a4a0ffa2b9",
-  "prevId": "7964bad2-888a-4f1f-b369-6a0ce8a3ae17",
+  "id": "78019435-6046-4c7c-b2d2-ff1f653486e4",
+  "prevId": "01d0aaa9-e865-464b-b8bd-751541839352",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -116,48 +116,6 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "data_migration_execution": {
-      "name": "data_migration_execution",
-      "schema": "cfg",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "object_name": {
-          "name": "object_name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "object_content": {
-          "name": "object_content",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
         }
       },
       "indexes": {},
@@ -353,7 +311,7 @@
         },
         "duration": {
           "name": "duration",
-          "type": "numeric(6, 2)",
+          "type": "double precision",
           "primaryKey": false,
           "notNull": true
         },
@@ -377,13 +335,13 @@
         },
         "distance": {
           "name": "distance",
-          "type": "numeric(6, 2)",
+          "type": "double precision",
           "primaryKey": false,
           "notNull": false
         },
         "energy_burned": {
           "name": "energy_burned",
-          "type": "numeric(6, 2)",
+          "type": "double precision",
           "primaryKey": false,
           "notNull": true
         },
@@ -499,7 +457,6 @@
   "enums": {},
   "schemas": {
     "ach": "ach",
-    "cfg": "cfg",
     "usr": "usr",
     "wrk": "wrk"
   },

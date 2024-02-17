@@ -7,6 +7,7 @@ CREATE SCHEMA "wrk";
 CREATE TABLE IF NOT EXISTS "ach"."achievement" (
 	"name" varchar(255) NOT NULL,
 	"description" varchar(5000),
+	"image_url" varchar(4000),
 	"level_id" integer NOT NULL,
 	"id" serial PRIMARY KEY NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -51,7 +52,8 @@ CREATE TABLE IF NOT EXISTS "usr"."workout" (
 	"ended_at" timestamp NOT NULL,
 	"external_id" varchar(255) NOT NULL,
 	"distance" numeric(6, 2),
-	"energy_burned" numeric(6, 2),
+	"energy_burned" numeric(6, 2) NOT NULL,
+	"workout_name" varchar(255),
 	CONSTRAINT "workout_external_id_unique" UNIQUE("external_id")
 );
 --> statement-breakpoint

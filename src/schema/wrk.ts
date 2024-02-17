@@ -1,6 +1,8 @@
-import { pgSchema, varchar } from 'drizzle-orm/pg-core';
-import { commonColumns } from '../common.js';
 import { relations } from 'drizzle-orm';
+import { pgSchema, varchar } from 'drizzle-orm/pg-core';
+
+import { commonColumns } from '../common.js';
+
 import { workout as usrWorkout } from './usr.js';
 
 export const schema = pgSchema('wrk');

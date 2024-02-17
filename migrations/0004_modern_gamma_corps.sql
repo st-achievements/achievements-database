@@ -1,1 +1,0 @@
-CREATE INDEX IF NOT EXISTS "data_migration_execution_object_name_index" ON "cfg"."data_migration_execution" ("object_name");

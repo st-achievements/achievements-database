@@ -1,6 +1,6 @@
 {
-  "id": "7964bad2-888a-4f1f-b369-6a0ce8a3ae17",
-  "prevId": "b6a7ee74-59e4-4d35-a288-906104f1c855",
+  "id": "01d0aaa9-e865-464b-b8bd-751541839352",
+  "prevId": "50bae0e7-e9b9-4e2f-baa9-285aba07e633",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -17,6 +17,12 @@
         "description": {
           "name": "description",
           "type": "varchar(5000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar(4000)",
           "primaryKey": false,
           "notNull": false
         },
@@ -336,6 +342,12 @@
         "energy_burned": {
           "name": "energy_burned",
           "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workout_name": {
+          "name": "workout_name",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         }

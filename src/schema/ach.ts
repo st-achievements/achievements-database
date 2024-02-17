@@ -1,6 +1,8 @@
-import { index, integer, pgSchema, varchar } from 'drizzle-orm/pg-core';
-import { commonColumns } from '../common.js';
 import { relations } from 'drizzle-orm';
+import { index, integer, pgSchema, varchar } from 'drizzle-orm/pg-core';
+
+import { commonColumns } from '../common.js';
+
 import { achievement as usrAchievement } from './usr.js';
 
 export const schema = pgSchema('ach');

@@ -1,6 +1,6 @@
+import camelcase from 'camelcase';
 import { PgSchema, serial, timestamp } from 'drizzle-orm/pg-core';
 import { CamelCase, StringKeyOf } from 'type-fest';
-import camelcase from 'camelcase';
 
 export const commonColumns = {
   id: serial('id').primaryKey(),
