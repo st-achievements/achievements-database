@@ -1,4 +1,4 @@
-name: Run migrations on production database
+name: Run migrations on database
 on:
   push:
     branches:
@@ -25,5 +25,5 @@ jobs:
         run: pnpm migration:build
       - name: Run migrations
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
         run: pnpm migration:run

@@ -3,7 +3,8 @@ import { pgSchema, varchar } from 'drizzle-orm/pg-core';
 
 import { commonColumns } from '../common.js';
 
-import { workout as usrWorkout } from './usr.js';
+import * as ach from './ach.js';
+import * as usr from './usr.js';
 
 export const schema = pgSchema('wrk');
 
@@ -13,5 +14,6 @@ export const workoutType = schema.table('workout_type', {
 });
 
 export const workoutTypeRelations = relations(workoutType, ({ many }) => ({
-  usrWorkout: many(usrWorkout),
+  usrWorkouts: many(usr.workout),
+  achAchievementWorkoutTypes: many(ach.achievementWorkoutType),
 }));

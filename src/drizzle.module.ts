@@ -1,17 +1,18 @@
 import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { Logger } from '@st-api/firebase';
-import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import type { Pool } from 'pg';
 import type { Class } from 'type-fest';
 
 import { getDrizzleSchema } from './common.js';
 import { DATABASE_CONNECTION_STRING } from './database-connection-string.secret.js';
 import { getClient } from './database.js';
-import { ach, usr, wrk } from './schema/index.js';
+import { ach, cfg, usr, wrk } from './schema/index.js';
 
 const allSchemas = {
   ...getDrizzleSchema(ach, 'ach'),
+  ...getDrizzleSchema(cfg, 'cfg'),
   ...getDrizzleSchema(usr, 'usr'),
   ...getDrizzleSchema(wrk, 'wrk'),
 };
@@ -24,6 +25,8 @@ export class Drizzle extends getClazz<NodePgDatabase<typeof allSchemas>>() {}
 
 const InternalClientToken = 'DRIZZLE_INTERNAL_CLIENT_TOKEN';
 
+const DrizzleLogger = Logger.create('drizzle');
+
 @Module({
   exports: [Drizzle],
   providers: [
@@ -33,7 +36,14 @@ const InternalClientToken = 'DRIZZLE_INTERNAL_CLIENT_TOKEN';
     },
     {
       provide: Drizzle,
-      useFactory: (client: Pool) => drizzle(client, { schema: allSchemas }),
+      useFactory: (client: Pool) =>
+        drizzle(client, {
+          schema: allSchemas,
+          logger: {
+            logQuery: (query, params) =>
+              DrizzleLogger.debug(`${query}; -- ${JSON.stringify(params)}`),
+          },
+        }),
       inject: [InternalClientToken],
     },
   ],

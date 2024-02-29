@@ -1,4 +1,4 @@
-import { Config } from 'drizzle-kit';
+import { defineConfig } from 'drizzle-kit';
 
 export function getConnectionString(): string {
   const connectionString = process.env.DATABASE_CONNECTION_STRING;
@@ -8,11 +8,11 @@ export function getConnectionString(): string {
   return connectionString;
 }
 
-export default {
+export default defineConfig({
   schema: './dist/schema/*',
   out: './migrations',
   driver: 'pg',
   dbCredentials: {
     connectionString: getConnectionString(),
   },
-} satisfies Config;
+});

@@ -15,6 +15,8 @@ const client = getClient(connectionString);
 
 const database = drizzle(client);
 
-await migrate(database, { migrationsFolder: 'migrations' });
-
-await client.end();
+try {
+  await migrate(database, { migrationsFolder: 'migrations' });
+} finally {
+  await client.end();
+}

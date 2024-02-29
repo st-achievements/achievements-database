@@ -1,11 +1,18 @@
 import camelcase from 'camelcase';
-import { PgSchema, serial, timestamp } from 'drizzle-orm/pg-core';
-import { CamelCase, StringKeyOf } from 'type-fest';
+import {
+  boolean,
+  type PgEnum,
+  type PgSchema,
+  serial,
+  timestamp,
+} from 'drizzle-orm/pg-core';
+import type { CamelCase, StringKeyOf } from 'type-fest';
 
 export const commonColumns = {
   id: serial('id').primaryKey(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  active: boolean('active').default(true).notNull(),
 } as const;
 
 type TransformDrizzleSchema<
@@ -31,3 +38,5 @@ export function getDrizzleSchema<
   }
   return newSchema as TransformDrizzleSchema<S, T>;
 }
+
+export type PgEnumAsType<T> = T extends PgEnum<infer A> ? A[number] : never;
