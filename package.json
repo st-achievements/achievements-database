@@ -1,6 +1,6 @@
 {
   "name": "@st-achievements/database",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/st-achievements/achievements-database#readme",
@@ -78,8 +78,8 @@
     "@nestjs/common": "^10.3.0",
     "@nestjs/core": "^10.3.0",
     "@st-api/firebase": "^3.0.0",
-    "drizzle-orm": "~0.29.0",
-    "firebase-functions": "^4.7.0",
+    "drizzle-orm": "^0.30.1",
+    "firebase-functions": "^4.8.0",
     "pg": "^8.11.0"
   }
 }
