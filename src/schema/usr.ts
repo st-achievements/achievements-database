@@ -45,11 +45,10 @@ export const achievement = schema.table(
       .notNull(),
   },
   (table) => ({
-    achAchievementIdIndex: index('usr_achievement_ach_achievement_id_index').on(
-      table.achAchievementId,
+    userPeriodIndex: index('usr_achievement_user_period_index').on(
+      table.userId,
+      table.periodId,
     ),
-    userIdIndex: index('usr_achievement_user_id_index').on(table.userId),
-    periodId: index('usr_achievement_period_id_index').on(table.periodId),
   }),
 );
 
@@ -90,11 +89,21 @@ export const workout = schema.table(
       .notNull(),
   },
   (table) => ({
-    workoutTypeIdIndex: index('usr_workout_workout_type_id_index').on(
+    userPeriodWorkoutType: index(
+      'usr_workout_user_period_workout_type_index',
+    ).on(table.userId, table.periodId, table.workoutTypeId),
+    userPeriodStartedAtEndedAt: index(
+      'usr_workout_user_period_started_at_ended_at_index',
+    ).on(table.userId, table.periodId, table.startedAt, table.endedAt),
+    userPeriodWorkoutTypeStartedAtEndedAt: index(
+      'usr_workout_user_period_workout_type_started_at_ended_at_index',
+    ).on(
+      table.userId,
+      table.periodId,
       table.workoutTypeId,
+      table.startedAt,
+      table.endedAt,
     ),
-    userIdIndex: index('usr_workout_user_id_index').on(table.userId),
-    periodIdIndex: index('usr_workout_period_id_index').on(table.periodId),
   }),
 );
 
@@ -126,15 +135,9 @@ export const achievementProgress = schema.table(
       .notNull(),
   },
   (table) => ({
-    achAchievementIdIndex: index(
-      'usr_achievement_progress_ach_achievement_id_index',
-    ).on(table.achAchievementId),
-    userIdIndex: index('usr_achievement_progress_user_id_index').on(
-      table.userId,
-    ),
-    periodIdIndex: index('usr_achievement_progress_period_id_index').on(
-      table.periodId,
-    ),
+    achievementUserPeriodIndex: index(
+      'usr_achievement_progress_achievement_user_period_index',
+    ).on(table.achAchievementId, table.userId, table.periodId),
   }),
 );
 

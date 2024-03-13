@@ -10,7 +10,7 @@ await build({
   entryPoints: files,
   bundle: false,
   format: 'esm',
-  minify: true,
+  minify: false,
   platform: 'node',
   outdir: 'dist',
 });

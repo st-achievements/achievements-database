@@ -26,8 +26,10 @@ export const period = schema.table(
     endAt: date('end_at').notNull(),
   },
   (table) => ({
-    startAtIndex: index('period_start_at_index').on(table.startAt),
-    endAtIndex: index('period_end_at_index').on(table.endAt),
+    startAtEndAtIndex: index('period_start_at_end_at_index').on(
+      table.startAt,
+      table.endAt,
+    ),
   }),
 );
 

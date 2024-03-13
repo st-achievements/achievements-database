@@ -1,0 +1,965 @@
+{
+  "id": "819fd79e-fbc4-4eb4-9c91-fe672dd3a4d8",
+  "prevId": "4135b07c-e727-4429-9bb5-ba98136120c3",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "achievement": {
+      "name": "achievement",
+      "schema": "ach",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(5000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar(4000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "level_id": {
+          "name": "level_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity_needed": {
+          "name": "quantity_needed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity_unit_id": {
+          "name": "quantity_unit_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workout_type_condition": {
+          "name": "workout_type_condition",
+          "type": "workout_type_condition",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period_condition": {
+          "name": "period_condition",
+          "type": "workout_period_condition",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period_condition_quantity": {
+          "name": "period_condition_quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "frequency": {
+          "name": "frequency",
+          "type": "frequency",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "frequency_condition": {
+          "name": "frequency_condition",
+          "type": "frequency_condition",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "has_progress_tracking": {
+          "name": "has_progress_tracking",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "achievement_level_id_ach_level_id_fk": {
+          "name": "achievement_level_id_ach_level_id_fk",
+          "tableFrom": "achievement",
+          "tableTo": "ach_level",
+          "schemaTo": "ach",
+          "columnsFrom": [
+            "level_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "achievement_quantity_unit_id_quantity_unit_id_fk": {
+          "name": "achievement_quantity_unit_id_quantity_unit_id_fk",
+          "tableFrom": "achievement",
+          "tableTo": "quantity_unit",
+          "schemaTo": "cfg",
+          "columnsFrom": [
+            "quantity_unit_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "achievement_workout_type": {
+      "name": "achievement_workout_type",
+      "schema": "ach",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "achievement_id": {
+          "name": "achievement_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workout_type_id": {
+          "name": "workout_type_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "achievement_workout_type_achievement_id_index": {
+          "name": "achievement_workout_type_achievement_id_index",
+          "columns": [
+            "achievement_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "achievement_workout_type_achievement_id_achievement_id_fk": {
+          "name": "achievement_workout_type_achievement_id_achievement_id_fk",
+          "tableFrom": "achievement_workout_type",
+          "tableTo": "achievement",
+          "schemaTo": "ach",
+          "columnsFrom": [
+            "achievement_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "achievement_workout_type_workout_type_id_workout_type_id_fk": {
+          "name": "achievement_workout_type_workout_type_id_workout_type_id_fk",
+          "tableFrom": "achievement_workout_type",
+          "tableTo": "workout_type",
+          "schemaTo": "wrk",
+          "columnsFrom": [
+            "workout_type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "ach_level": {
+      "name": "ach_level",
+      "schema": "ach",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar(4000)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "period": {
+      "name": "period",
+      "schema": "cfg",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "start_at": {
+          "name": "start_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "end_at": {
+          "name": "end_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "period_start_at_end_at_index": {
+          "name": "period_start_at_end_at_index",
+          "columns": [
+            "start_at",
+            "end_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "quantity_unit": {
+      "name": "quantity_unit",
+      "schema": "cfg",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "quantity_unit_name_unique": {
+          "name": "quantity_unit_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    },
+    "usr_achievement": {
+      "name": "usr_achievement",
+      "schema": "usr",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ach_achievement_id": {
+          "name": "ach_achievement_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "achieved_at": {
+          "name": "achieved_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "period_id": {
+          "name": "period_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "usr_achievement_user_period_index": {
+          "name": "usr_achievement_user_period_index",
+          "columns": [
+            "user_id",
+            "period_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "usr_achievement_user_id_user_id_fk": {
+          "name": "usr_achievement_user_id_user_id_fk",
+          "tableFrom": "usr_achievement",
+          "tableTo": "user",
+          "schemaTo": "usr",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_achievement_ach_achievement_id_achievement_id_fk": {
+          "name": "usr_achievement_ach_achievement_id_achievement_id_fk",
+          "tableFrom": "usr_achievement",
+          "tableTo": "achievement",
+          "schemaTo": "ach",
+          "columnsFrom": [
+            "ach_achievement_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_achievement_period_id_period_id_fk": {
+          "name": "usr_achievement_period_id_period_id_fk",
+          "tableFrom": "usr_achievement",
+          "tableTo": "period",
+          "schemaTo": "cfg",
+          "columnsFrom": [
+            "period_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "usr_achievement_progress": {
+      "name": "usr_achievement_progress",
+      "schema": "usr",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ach_achievement_id": {
+          "name": "ach_achievement_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period_id": {
+          "name": "period_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "usr_achievement_progress_achievement_user_period_index": {
+          "name": "usr_achievement_progress_achievement_user_period_index",
+          "columns": [
+            "ach_achievement_id",
+            "user_id",
+            "period_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "usr_achievement_progress_ach_achievement_id_achievement_id_fk": {
+          "name": "usr_achievement_progress_ach_achievement_id_achievement_id_fk",
+          "tableFrom": "usr_achievement_progress",
+          "tableTo": "achievement",
+          "schemaTo": "ach",
+          "columnsFrom": [
+            "ach_achievement_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_achievement_progress_user_id_user_id_fk": {
+          "name": "usr_achievement_progress_user_id_user_id_fk",
+          "tableFrom": "usr_achievement_progress",
+          "tableTo": "user",
+          "schemaTo": "usr",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_achievement_progress_period_id_period_id_fk": {
+          "name": "usr_achievement_progress_period_id_period_id_fk",
+          "tableFrom": "usr_achievement_progress",
+          "tableTo": "period",
+          "schemaTo": "cfg",
+          "columnsFrom": [
+            "period_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user": {
+      "name": "user",
+      "schema": "usr",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_external_id_unique": {
+          "name": "user_external_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "external_id"
+          ]
+        },
+        "user_name_unique": {
+          "name": "user_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    },
+    "usr_workout": {
+      "name": "usr_workout",
+      "schema": "usr",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workout_type_id": {
+          "name": "workout_type_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duration": {
+          "name": "duration",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "distance": {
+          "name": "distance",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "energy_burned": {
+          "name": "energy_burned",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workout_name": {
+          "name": "workout_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "period_id": {
+          "name": "period_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "usr_workout_user_period_workout_type_index": {
+          "name": "usr_workout_user_period_workout_type_index",
+          "columns": [
+            "user_id",
+            "period_id",
+            "workout_type_id"
+          ],
+          "isUnique": false
+        },
+        "usr_workout_user_period_started_at_ended_at_index": {
+          "name": "usr_workout_user_period_started_at_ended_at_index",
+          "columns": [
+            "user_id",
+            "period_id",
+            "started_at",
+            "ended_at"
+          ],
+          "isUnique": false
+        },
+        "usr_workout_user_period_workout_type_started_at_ended_at_index": {
+          "name": "usr_workout_user_period_workout_type_started_at_ended_at_index",
+          "columns": [
+            "user_id",
+            "period_id",
+            "workout_type_id",
+            "started_at",
+            "ended_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "usr_workout_user_id_user_id_fk": {
+          "name": "usr_workout_user_id_user_id_fk",
+          "tableFrom": "usr_workout",
+          "tableTo": "user",
+          "schemaTo": "usr",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_workout_workout_type_id_workout_type_id_fk": {
+          "name": "usr_workout_workout_type_id_workout_type_id_fk",
+          "tableFrom": "usr_workout",
+          "tableTo": "workout_type",
+          "schemaTo": "wrk",
+          "columnsFrom": [
+            "workout_type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usr_workout_period_id_period_id_fk": {
+          "name": "usr_workout_period_id_period_id_fk",
+          "tableFrom": "usr_workout",
+          "tableTo": "period",
+          "schemaTo": "cfg",
+          "columnsFrom": [
+            "period_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "usr_workout_external_id_unique": {
+          "name": "usr_workout_external_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "external_id"
+          ]
+        }
+      }
+    },
+    "workout_type": {
+      "name": "workout_type",
+      "schema": "wrk",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "workout_type_name_unique": {
+          "name": "workout_type_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {
+    "frequency_condition": {
+      "name": "frequency_condition",
+      "values": {
+        "every": "every"
+      }
+    },
+    "frequency": {
+      "name": "frequency",
+      "values": {
+        "day": "day",
+        "week": "week"
+      }
+    },
+    "workout_period_condition": {
+      "name": "workout_period_condition",
+      "values": {
+        "sameDay": "sameDay",
+        "sameWeek": "sameWeek",
+        "sameMonth": "sameMonth",
+        "samePeriod": "samePeriod",
+        "singleSession": "singleSession"
+      }
+    },
+    "workout_type_condition": {
+      "name": "workout_type_condition",
+      "values": {
+        "anyOf": "anyOf",
+        "allOf": "allOf",
+        "any": "any",
+        "exclusiveAny": "exclusiveAny",
+        "exclusiveAnyOf": "exclusiveAnyOf"
+      }
+    }
+  },
+  "schemas": {
+    "ach": "ach",
+    "cfg": "cfg",
+    "usr": "usr",
+    "wrk": "wrk"
+  },
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

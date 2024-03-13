@@ -4,18 +4,9 @@ import { Logger } from '@st-api/firebase';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import type { Pool } from 'pg';
 import type { Class } from 'type-fest';
-
-import { getDrizzleSchema } from './common.js';
 import { DATABASE_CONNECTION_STRING } from './database-connection-string.secret.js';
 import { getClient } from './database.js';
-import { ach, cfg, usr, wrk } from './schema/index.js';
-
-const allSchemas = {
-  ...getDrizzleSchema(ach, 'ach'),
-  ...getDrizzleSchema(cfg, 'cfg'),
-  ...getDrizzleSchema(usr, 'usr'),
-  ...getDrizzleSchema(wrk, 'wrk'),
-};
+import { allSchemas } from './all-schemas.js';
 
 function getClazz<T>(): Class<T> {
   return class {} as Class<T>;

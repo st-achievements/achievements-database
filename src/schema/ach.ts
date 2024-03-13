@@ -1,5 +1,12 @@
 import { relations } from 'drizzle-orm';
-import { index, integer, pgEnum, pgSchema, varchar } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  index,
+  integer,
+  pgEnum,
+  pgSchema,
+  varchar,
+} from 'drizzle-orm/pg-core';
 
 import { commonColumns, PgEnumAsType } from '../common.js';
 
@@ -13,7 +20,6 @@ export const WorkoutTypeConditionEnum = pgEnum('workout_type_condition', [
   'anyOf',
   'allOf',
   'any',
-  'all',
   'exclusiveAny',
   'exclusiveAnyOf',
 ]);
@@ -23,68 +29,48 @@ export type WorkoutTypeConditionType = PgEnumAsType<
 >;
 
 export const PeriodConditionEnum = pgEnum('workout_period_condition', [
-  'hours',
-  'days',
-  'weeks',
-  'months',
   'sameDay',
   'sameWeek',
   'sameMonth',
-  'sameYear',
   'samePeriod',
   'singleSession',
 ]);
 
 export type PeriodConditionType = PgEnumAsType<typeof PeriodConditionEnum>;
 
-export const FrequencyEnum = pgEnum('frequency', [
-  'hour',
-  'day',
-  'week',
-  'month',
-]);
+export const FrequencyEnum = pgEnum('frequency', ['day', 'week']);
 
 export type FrequencyType = PgEnumAsType<typeof FrequencyEnum>;
 
-export const FrequencyConditionEnum = pgEnum('frequency_condition', [
-  'every',
-  'any',
-]);
+export const FrequencyConditionEnum = pgEnum('frequency_condition', ['every']);
 
 export type FrequencyConditionType = PgEnumAsType<
   typeof FrequencyConditionEnum
 >;
 
-export const achievement = schema.table(
-  'achievement',
-  {
-    ...commonColumns,
-    name: varchar('name', { length: 255 }).notNull(),
-    description: varchar('description', { length: 5000 }),
-    imageUrl: varchar('image_url', { length: 4000 }),
-    levelId: integer('level_id')
-      .references(() => level.id)
-      .notNull(),
-    quantityNeeded: integer('quantity_needed').notNull(),
-    quantityUnitId: integer('quantity_unit_id')
-      .references(() => cfg.quantityUnit.id)
-      .notNull(),
-    workoutTypeCondition: WorkoutTypeConditionEnum(
-      'workout_type_condition',
-    ).notNull(),
-    periodCondition: PeriodConditionEnum('period_condition').notNull(),
-    periodConditionQuantity: integer('period_condition_quantity'),
-    frequency: FrequencyEnum('frequency'),
-    frequencyQuantity: integer('frequency_quantity'),
-    frequencyCondition: FrequencyConditionEnum('frequency_condition'),
-  },
-  (table) => ({
-    levelIdIndex: index('achievement_level_id_index').on(table.levelId),
-    quantityUnitIdIndex: index('achievement_quantity_unit_id_index').on(
-      table.quantityUnitId,
-    ),
-  }),
-);
+export const achievement = schema.table('achievement', {
+  ...commonColumns,
+  name: varchar('name', { length: 255 }).notNull(),
+  description: varchar('description', { length: 5000 }),
+  imageUrl: varchar('image_url', { length: 4000 }),
+  levelId: integer('level_id')
+    .references(() => level.id)
+    .notNull(),
+  quantityNeeded: integer('quantity_needed').notNull(),
+  quantityUnitId: integer('quantity_unit_id')
+    .references(() => cfg.quantityUnit.id)
+    .notNull(),
+  workoutTypeCondition: WorkoutTypeConditionEnum(
+    'workout_type_condition',
+  ).notNull(),
+  periodCondition: PeriodConditionEnum('period_condition').notNull(),
+  periodConditionQuantity: integer('period_condition_quantity'),
+  frequency: FrequencyEnum('frequency'),
+  frequencyCondition: FrequencyConditionEnum('frequency_condition'),
+  hasProgressTracking: boolean('has_progress_tracking')
+    .default(false)
+    .notNull(),
+});
 
 export const achievementRelations = relations(achievement, ({ one, many }) => ({
   level: one(level, {
@@ -115,9 +101,6 @@ export const achievementWorkoutType = schema.table(
     achievementIdIndex: index(
       'achievement_workout_type_achievement_id_index',
     ).on(table.achievementId),
-    workoutTypeIdIndex: index(
-      'achievement_workout_type_workout_type_id_index',
-    ).on(table.workoutTypeId),
   }),
 );
 

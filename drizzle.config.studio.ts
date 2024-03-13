@@ -9,7 +9,7 @@ export function getConnectionString(): string {
 }
 
 export default defineConfig({
-  schema: './dist/schema/*',
+  schema: './dist/studio.js',
   out: './migrations',
   driver: 'pg',
   dbCredentials: {
