@@ -1,5 +1,5 @@
 {
-  "id": "4135b07c-e727-4429-9bb5-ba98136120c3",
+  "id": "9ce48dbb-0089-4e78-97fc-9dadd75da984",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -83,21 +83,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "period_condition_quantity": {
-          "name": "period_condition_quantity",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "frequency": {
           "name": "frequency",
           "type": "frequency",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "frequency_quantity": {
-          "name": "frequency_quantity",
-          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -106,24 +94,16 @@
           "type": "frequency_condition",
           "primaryKey": false,
           "notNull": false
-        }
-      },
-      "indexes": {
-        "achievement_level_id_index": {
-          "name": "achievement_level_id_index",
-          "columns": [
-            "level_id"
-          ],
-          "isUnique": false
         },
-        "achievement_quantity_unit_id_index": {
-          "name": "achievement_quantity_unit_id_index",
-          "columns": [
-            "quantity_unit_id"
-          ],
-          "isUnique": false
+        "has_progress_tracking": {
+          "name": "has_progress_tracking",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
+      "indexes": {},
       "foreignKeys": {
         "achievement_level_id_ach_level_id_fk": {
           "name": "achievement_level_id_ach_level_id_fk",
@@ -206,13 +186,6 @@
           "name": "achievement_workout_type_achievement_id_index",
           "columns": [
             "achievement_id"
-          ],
-          "isUnique": false
-        },
-        "achievement_workout_type_workout_type_id_index": {
-          "name": "achievement_workout_type_workout_type_id_index",
-          "columns": [
-            "workout_type_id"
           ],
           "isUnique": false
         }
@@ -344,16 +317,10 @@
         }
       },
       "indexes": {
-        "period_start_at_index": {
-          "name": "period_start_at_index",
+        "period_start_at_end_at_index": {
+          "name": "period_start_at_end_at_index",
           "columns": [
-            "start_at"
-          ],
-          "isUnique": false
-        },
-        "period_end_at_index": {
-          "name": "period_end_at_index",
-          "columns": [
+            "start_at",
             "end_at"
           ],
           "isUnique": false
@@ -478,23 +445,10 @@
         }
       },
       "indexes": {
-        "usr_achievement_ach_achievement_id_index": {
-          "name": "usr_achievement_ach_achievement_id_index",
+        "usr_achievement_user_period_index": {
+          "name": "usr_achievement_user_period_index",
           "columns": [
-            "ach_achievement_id"
-          ],
-          "isUnique": false
-        },
-        "usr_achievement_user_id_index": {
-          "name": "usr_achievement_user_id_index",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": false
-        },
-        "usr_achievement_period_id_index": {
-          "name": "usr_achievement_period_id_index",
-          "columns": [
+            "user_id",
             "period_id"
           ],
           "isUnique": false
@@ -604,23 +558,11 @@
         }
       },
       "indexes": {
-        "usr_achievement_progress_ach_achievement_id_index": {
-          "name": "usr_achievement_progress_ach_achievement_id_index",
+        "usr_achievement_progress_achievement_user_period_index": {
+          "name": "usr_achievement_progress_achievement_user_period_index",
           "columns": [
-            "ach_achievement_id"
-          ],
-          "isUnique": false
-        },
-        "usr_achievement_progress_user_id_index": {
-          "name": "usr_achievement_progress_user_id_index",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": false
-        },
-        "usr_achievement_progress_period_id_index": {
-          "name": "usr_achievement_progress_period_id_index",
-          "columns": [
+            "ach_achievement_id",
+            "user_id",
             "period_id"
           ],
           "isUnique": false
@@ -830,24 +772,33 @@
         }
       },
       "indexes": {
-        "usr_workout_workout_type_id_index": {
-          "name": "usr_workout_workout_type_id_index",
+        "usr_workout_user_period_workout_type_index": {
+          "name": "usr_workout_user_period_workout_type_index",
           "columns": [
+            "user_id",
+            "period_id",
             "workout_type_id"
           ],
           "isUnique": false
         },
-        "usr_workout_user_id_index": {
-          "name": "usr_workout_user_id_index",
+        "usr_workout_user_period_started_at_ended_at_index": {
+          "name": "usr_workout_user_period_started_at_ended_at_index",
           "columns": [
-            "user_id"
+            "user_id",
+            "period_id",
+            "started_at",
+            "ended_at"
           ],
           "isUnique": false
         },
-        "usr_workout_period_id_index": {
-          "name": "usr_workout_period_id_index",
+        "usr_workout_user_period_workout_type_started_at_ended_at_index": {
+          "name": "usr_workout_user_period_workout_type_started_at_ended_at_index",
           "columns": [
-            "period_id"
+            "user_id",
+            "period_id",
+            "workout_type_id",
+            "started_at",
+            "ended_at"
           ],
           "isUnique": false
         }
@@ -963,30 +914,22 @@
     "frequency_condition": {
       "name": "frequency_condition",
       "values": {
-        "every": "every",
-        "any": "any"
+        "every": "every"
       }
     },
     "frequency": {
       "name": "frequency",
       "values": {
-        "hour": "hour",
         "day": "day",
-        "week": "week",
-        "month": "month"
+        "week": "week"
       }
     },
     "workout_period_condition": {
       "name": "workout_period_condition",
       "values": {
-        "hours": "hours",
-        "days": "days",
-        "weeks": "weeks",
-        "months": "months",
         "sameDay": "sameDay",
         "sameWeek": "sameWeek",
         "sameMonth": "sameMonth",
-        "sameYear": "sameYear",
         "samePeriod": "samePeriod",
         "singleSession": "singleSession"
       }
@@ -997,7 +940,6 @@
         "anyOf": "anyOf",
         "allOf": "allOf",
         "any": "any",
-        "all": "all",
         "exclusiveAny": "exclusiveAny",
         "exclusiveAnyOf": "exclusiveAnyOf"
       }

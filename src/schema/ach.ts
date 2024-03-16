@@ -64,7 +64,6 @@ export const achievement = schema.table('achievement', {
     'workout_type_condition',
   ).notNull(),
   periodCondition: PeriodConditionEnum('period_condition').notNull(),
-  periodConditionQuantity: integer('period_condition_quantity'),
   frequency: FrequencyEnum('frequency'),
   frequencyCondition: FrequencyConditionEnum('frequency_condition'),
   hasProgressTracking: boolean('has_progress_tracking')
