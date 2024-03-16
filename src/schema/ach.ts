@@ -38,7 +38,7 @@ export const PeriodConditionEnum = pgEnum('workout_period_condition', [
 
 export type PeriodConditionType = PgEnumAsType<typeof PeriodConditionEnum>;
 
-export const FrequencyEnum = pgEnum('frequency', ['day', 'week']);
+export const FrequencyEnum = pgEnum('frequency', ['day', 'week', 'month']);
 
 export type FrequencyType = PgEnumAsType<typeof FrequencyEnum>;
 

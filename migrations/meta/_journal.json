@@ -15,6 +15,13 @@
       "when": 1710557703072,
       "tag": "0001_chemical_centennial",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710562078800,
+      "tag": "0002_wide_snowbird",
+      "breakpoints": true
     }
   ]
 }
