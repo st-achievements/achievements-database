@@ -11,8 +11,8 @@ export const apiKey = schema.table(
   'api_key',
   {
     ...commonColumns,
-    key: varchar('key', { length: 1000 }),
-    salt: varchar('salt', { length: 50 }),
+    key: varchar('key', { length: 1000 }).notNull(),
+    salt: varchar('salt', { length: 50 }).notNull(),
     userId: integer('user_id')
       .references(() => usr.user.id)
       .notNull(),
