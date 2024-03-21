@@ -13,6 +13,7 @@ import { commonColumns } from '../common.js';
 
 import * as ach from './ach.js';
 import * as cfg from './cfg.js';
+import * as iam from './iam.js';
 import * as wrk from './wrk.js';
 
 export const schema = pgSchema('usr');
@@ -27,6 +28,7 @@ export const userRelations = relations(user, ({ many }) => ({
   achievements: many(achievement),
   workouts: many(workout),
   achievementProgresses: many(achievementProgress),
+  apiKeys: many(iam.apiKey),
 }));
 
 export const achievement = schema.table(

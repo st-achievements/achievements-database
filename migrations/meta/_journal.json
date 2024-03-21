@@ -22,6 +22,20 @@
       "when": 1710562078800,
       "tag": "0002_wide_snowbird",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1710988101804,
+      "tag": "0003_curved_raider",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1710988131012,
+      "tag": "0004_light_chameleon",
+      "breakpoints": true
     }
   ]
 }
