@@ -8,11 +8,15 @@ import {
 } from 'drizzle-orm/pg-core';
 import type { CamelCase, StringKeyOf } from 'type-fest';
 
-export const commonColumns = {
-  id: serial('id').primaryKey(),
+export const commonColumnsWithoutId = {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
   active: boolean('active').default(true).notNull(),
+};
+
+export const commonColumns = {
+  id: serial('id').primaryKey(),
+  ...commonColumnsWithoutId,
 } as const;
 
 type TransformDrizzleSchema<

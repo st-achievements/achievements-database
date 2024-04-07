@@ -4,12 +4,13 @@ import {
   index,
   integer,
   pgSchema,
+  primaryKey,
   smallint,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { commonColumns } from '../common.js';
+import { commonColumns, commonColumnsWithoutId } from '../common.js';
 
 import * as ach from './ach.js';
 import * as cfg from './cfg.js';
@@ -124,7 +125,7 @@ export const workoutRelations = relations(workout, ({ one }) => ({
 export const achievementProgress = schema.table(
   'usr_achievement_progress',
   {
-    ...commonColumns,
+    ...commonColumnsWithoutId,
     quantity: smallint('quantity').notNull(),
     achAchievementId: integer('ach_achievement_id')
       .references(() => ach.achievement.id)
@@ -140,6 +141,9 @@ export const achievementProgress = schema.table(
     achievementUserPeriodIndex: index(
       'usr_achievement_progress_achievement_user_period_index',
     ).on(table.achAchievementId, table.userId, table.periodId),
+    pk: primaryKey({
+      columns: [table.achAchievementId, table.userId, table.periodId],
+    }),
   }),
 );
 
