@@ -35,7 +35,7 @@ export const userRelations = relations(user, ({ many }) => ({
 export const achievement = schema.table(
   'usr_achievement',
   {
-    ...commonColumns,
+    ...commonColumnsWithoutId,
     userId: integer('user_id')
       .references(() => user.id)
       .notNull(),
@@ -52,6 +52,9 @@ export const achievement = schema.table(
       table.userId,
       table.periodId,
     ),
+    pk: primaryKey({
+      columns: [table.achAchievementId, table.userId, table.periodId],
+    }),
   }),
 );
 
@@ -138,9 +141,6 @@ export const achievementProgress = schema.table(
       .notNull(),
   },
   (table) => ({
-    achievementUserPeriodIndex: index(
-      'usr_achievement_progress_achievement_user_period_index',
-    ).on(table.achAchievementId, table.userId, table.periodId),
     pk: primaryKey({
       columns: [table.achAchievementId, table.userId, table.periodId],
     }),
