@@ -1,6 +1,8 @@
 import camelcase from 'camelcase';
 import {
   boolean,
+  integer,
+  jsonb,
   type PgEnum,
   type PgSchema,
   serial,
@@ -10,8 +12,18 @@ import type { CamelCase, StringKeyOf } from 'type-fest';
 
 export const commonColumnsWithoutId = {
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
   active: boolean('active').default(true).notNull(),
+  metadata: jsonb('metadata')
+    .$type<Record<string, string | undefined>>()
+    .notNull()
+    .default({}),
+  // TODO use authorization context on created_by and updated_by when ready
+  createdBy: integer('created_by').notNull().default(-1),
+  updatedBy: integer('updated_by').notNull().default(-1),
 };
 
 export const commonColumns = {

@@ -93,6 +93,7 @@ export const workout = schema.table(
     periodId: integer('period_id')
       .references(() => cfg.period.id)
       .notNull(),
+    achievementProcessedAt: timestamp('achievement_processed_at'),
   },
   (table) => ({
     userPeriodWorkoutType: index(

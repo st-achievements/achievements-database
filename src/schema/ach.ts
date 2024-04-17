@@ -3,7 +3,6 @@ import {
   boolean,
   index,
   integer,
-  pgEnum,
   pgSchema,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -16,7 +15,7 @@ import * as wrk from './wrk.js';
 
 export const schema = pgSchema('ach');
 
-export const WorkoutTypeConditionEnum = pgEnum('workout_type_condition', [
+export const WorkoutTypeConditionEnum = schema.enum('workout_type_condition', [
   'anyOf',
   'allOf',
   'any',
@@ -28,7 +27,7 @@ export type WorkoutTypeConditionType = PgEnumAsType<
   typeof WorkoutTypeConditionEnum
 >;
 
-export const PeriodConditionEnum = pgEnum('workout_period_condition', [
+export const PeriodConditionEnum = schema.enum('workout_period_condition', [
   'sameDay',
   'sameWeek',
   'sameMonth',
@@ -38,11 +37,13 @@ export const PeriodConditionEnum = pgEnum('workout_period_condition', [
 
 export type PeriodConditionType = PgEnumAsType<typeof PeriodConditionEnum>;
 
-export const FrequencyEnum = pgEnum('frequency', ['day', 'week', 'month']);
+export const FrequencyEnum = schema.enum('frequency', ['day', 'week', 'month']);
 
 export type FrequencyType = PgEnumAsType<typeof FrequencyEnum>;
 
-export const FrequencyConditionEnum = pgEnum('frequency_condition', ['every']);
+export const FrequencyConditionEnum = schema.enum('frequency_condition', [
+  'every',
+]);
 
 export type FrequencyConditionType = PgEnumAsType<
   typeof FrequencyConditionEnum
