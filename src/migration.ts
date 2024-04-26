@@ -11,7 +11,9 @@ if (!connectionString) {
   throw new Error('DATABASE_CONNECTION_STRING not found');
 }
 
-const client = getClient(connectionString);
+const client = getClient({
+  connectionString,
+});
 
 const database = drizzle(client);
 

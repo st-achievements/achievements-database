@@ -1,5 +1,6 @@
 import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
+import { StApiName } from '@st-api/core';
 import { Logger } from '@st-api/firebase';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import type { Pool } from 'pg';
@@ -24,7 +25,12 @@ const DrizzleLogger = Logger.create('drizzle');
   providers: [
     {
       provide: InternalClientToken,
-      useFactory: () => getClient(DATABASE_CONNECTION_STRING.value()),
+      useFactory: (apiName: string) =>
+        getClient({
+          connectionString: DATABASE_CONNECTION_STRING.value(),
+          applicationName: apiName,
+        }),
+      inject: [StApiName],
     },
     {
       provide: Drizzle,
