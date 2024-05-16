@@ -10,6 +10,11 @@ import {
 } from 'drizzle-orm/pg-core';
 import type { CamelCase, StringKeyOf } from 'type-fest';
 
+export type MetadataColumnType = Record<
+  string,
+  string | number | boolean | undefined | null
+>;
+
 export const commonColumnsWithoutId = {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
@@ -17,10 +22,7 @@ export const commonColumnsWithoutId = {
     .notNull()
     .$onUpdate(() => new Date()),
   active: boolean('active').default(true).notNull(),
-  metadata: jsonb('metadata')
-    .$type<Record<string, string | undefined>>()
-    .notNull()
-    .default({}),
+  metadata: jsonb('metadata').$type<MetadataColumnType>().notNull().default({}),
   // TODO use authorization context on created_by and updated_by when ready
   createdBy: integer('created_by').notNull().default(-1),
   updatedBy: integer('updated_by').notNull().default(-1),
@@ -47,7 +49,7 @@ export function getDrizzleSchema<
       `Schema name is different from name. Schema: "${schema.schema.schemaName}" - Name: "${name}"`,
     );
   }
-  const newSchema: Record<string, unknown> = {} as never;
+  const newSchema: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(schema)) {
     const newKey = camelcase(`${name}_${key}`);
     newSchema[newKey] = value;

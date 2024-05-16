@@ -1,75 +1,12 @@
 {
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1710557239109,
-      "tag": "0000_brief_avengers",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1710557703072,
-      "tag": "0001_chemical_centennial",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1710562078800,
-      "tag": "0002_wide_snowbird",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1710988101804,
-      "tag": "0003_curved_raider",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1710988131012,
-      "tag": "0004_light_chameleon",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1710990789617,
-      "tag": "0005_cool_dazzler",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1712457077885,
-      "tag": "0006_lean_invisible_woman",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "5",
-      "when": 1712719790703,
-      "tag": "0007_faithful_lord_tyger",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "5",
-      "when": 1712887144094,
-      "tag": "0008_famous_glorian",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "5",
-      "when": 1713322957633,
-      "tag": "0009_curious_vivisector",
+      "version": "6",
+      "when": 1715818188681,
+      "tag": "0000_cute_patriot",
       "breakpoints": true
     }
   ]

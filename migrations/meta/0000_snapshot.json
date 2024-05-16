@@ -1,10 +1,10 @@
 {
-  "id": "9ce48dbb-0089-4e78-97fc-9dadd75da984",
+  "id": "919914d9-efd3-4edd-a713-ffac7dca0f9f",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "6",
+  "dialect": "postgresql",
   "tables": {
-    "achievement": {
+    "ach.achievement": {
       "name": "achievement",
       "schema": "ach",
       "columns": {
@@ -34,6 +34,27 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "name": {
           "name": "name",
@@ -74,24 +95,28 @@
         "workout_type_condition": {
           "name": "workout_type_condition",
           "type": "workout_type_condition",
+          "typeSchema": "ach",
           "primaryKey": false,
           "notNull": true
         },
         "period_condition": {
           "name": "period_condition",
           "type": "workout_period_condition",
+          "typeSchema": "ach",
           "primaryKey": false,
           "notNull": true
         },
         "frequency": {
           "name": "frequency",
           "type": "frequency",
+          "typeSchema": "ach",
           "primaryKey": false,
           "notNull": false
         },
         "frequency_condition": {
           "name": "frequency_condition",
           "type": "frequency_condition",
+          "typeSchema": "ach",
           "primaryKey": false,
           "notNull": false
         },
@@ -105,10 +130,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "achievement_level_id_ach_level_id_fk": {
-          "name": "achievement_level_id_ach_level_id_fk",
+        "achievement_level_id_level_id_fk": {
+          "name": "achievement_level_id_level_id_fk",
           "tableFrom": "achievement",
-          "tableTo": "ach_level",
+          "tableTo": "level",
           "schemaTo": "ach",
           "columnsFrom": [
             "level_id"
@@ -137,7 +162,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "achievement_workout_type": {
+    "ach.achievement_workout_type": {
       "name": "achievement_workout_type",
       "schema": "ach",
       "columns": {
@@ -167,6 +192,27 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "achievement_id": {
           "name": "achievement_id",
@@ -223,8 +269,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "ach_level": {
-      "name": "ach_level",
+    "ach.level": {
+      "name": "level",
       "schema": "ach",
       "columns": {
         "id": {
@@ -254,6 +300,27 @@
           "notNull": true,
           "default": true
         },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
         "name": {
           "name": "name",
           "type": "varchar(255)",
@@ -272,7 +339,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "period": {
+    "cfg.period": {
       "name": "period",
       "schema": "cfg",
       "columns": {
@@ -303,6 +370,27 @@
           "notNull": true,
           "default": true
         },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
         "start_at": {
           "name": "start_at",
           "type": "date",
@@ -330,7 +418,7 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "quantity_unit": {
+    "cfg.quantity_unit": {
       "name": "quantity_unit",
       "schema": "cfg",
       "columns": {
@@ -361,6 +449,27 @@
           "notNull": true,
           "default": true
         },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
         "name": {
           "name": "name",
           "type": "varchar(10)",
@@ -387,9 +496,9 @@
         }
       }
     },
-    "usr_achievement": {
-      "name": "usr_achievement",
-      "schema": "usr",
+    "iam.api_key": {
+      "name": "api_key",
+      "schema": "iam",
       "columns": {
         "id": {
           "name": "id",
@@ -417,6 +526,120 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "key": {
+          "name": "key",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "salt": {
+          "name": "salt",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "api_key_user_id_index": {
+          "name": "api_key_user_id_index",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "api_key_user_id_user_id_fk": {
+          "name": "api_key_user_id_user_id_fk",
+          "tableFrom": "api_key",
+          "tableTo": "user",
+          "schemaTo": "usr",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "usr.achievement": {
+      "name": "achievement",
+      "schema": "usr",
+      "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "user_id": {
           "name": "user_id",
@@ -455,9 +678,9 @@
         }
       },
       "foreignKeys": {
-        "usr_achievement_user_id_user_id_fk": {
-          "name": "usr_achievement_user_id_user_id_fk",
-          "tableFrom": "usr_achievement",
+        "achievement_user_id_user_id_fk": {
+          "name": "achievement_user_id_user_id_fk",
+          "tableFrom": "achievement",
           "tableTo": "user",
           "schemaTo": "usr",
           "columnsFrom": [
@@ -469,9 +692,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_achievement_ach_achievement_id_achievement_id_fk": {
-          "name": "usr_achievement_ach_achievement_id_achievement_id_fk",
-          "tableFrom": "usr_achievement",
+        "achievement_ach_achievement_id_achievement_id_fk": {
+          "name": "achievement_ach_achievement_id_achievement_id_fk",
+          "tableFrom": "achievement",
           "tableTo": "achievement",
           "schemaTo": "ach",
           "columnsFrom": [
@@ -483,9 +706,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_achievement_period_id_period_id_fk": {
-          "name": "usr_achievement_period_id_period_id_fk",
-          "tableFrom": "usr_achievement",
+        "achievement_period_id_period_id_fk": {
+          "name": "achievement_period_id_period_id_fk",
+          "tableFrom": "achievement",
           "tableTo": "period",
           "schemaTo": "cfg",
           "columnsFrom": [
@@ -498,19 +721,22 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "achievement_ach_achievement_id_user_id_period_id_pk": {
+          "name": "achievement_ach_achievement_id_user_id_period_id_pk",
+          "columns": [
+            "ach_achievement_id",
+            "user_id",
+            "period_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
-    "usr_achievement_progress": {
-      "name": "usr_achievement_progress",
+    "usr.achievement_progress": {
+      "name": "achievement_progress",
       "schema": "usr",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -531,6 +757,27 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "quantity": {
           "name": "quantity",
@@ -557,21 +804,11 @@
           "notNull": true
         }
       },
-      "indexes": {
-        "usr_achievement_progress_achievement_user_period_index": {
-          "name": "usr_achievement_progress_achievement_user_period_index",
-          "columns": [
-            "ach_achievement_id",
-            "user_id",
-            "period_id"
-          ],
-          "isUnique": false
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
-        "usr_achievement_progress_ach_achievement_id_achievement_id_fk": {
-          "name": "usr_achievement_progress_ach_achievement_id_achievement_id_fk",
-          "tableFrom": "usr_achievement_progress",
+        "achievement_progress_ach_achievement_id_achievement_id_fk": {
+          "name": "achievement_progress_ach_achievement_id_achievement_id_fk",
+          "tableFrom": "achievement_progress",
           "tableTo": "achievement",
           "schemaTo": "ach",
           "columnsFrom": [
@@ -583,9 +820,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_achievement_progress_user_id_user_id_fk": {
-          "name": "usr_achievement_progress_user_id_user_id_fk",
-          "tableFrom": "usr_achievement_progress",
+        "achievement_progress_user_id_user_id_fk": {
+          "name": "achievement_progress_user_id_user_id_fk",
+          "tableFrom": "achievement_progress",
           "tableTo": "user",
           "schemaTo": "usr",
           "columnsFrom": [
@@ -597,9 +834,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_achievement_progress_period_id_period_id_fk": {
-          "name": "usr_achievement_progress_period_id_period_id_fk",
-          "tableFrom": "usr_achievement_progress",
+        "achievement_progress_period_id_period_id_fk": {
+          "name": "achievement_progress_period_id_period_id_fk",
+          "tableFrom": "achievement_progress",
           "tableTo": "period",
           "schemaTo": "cfg",
           "columnsFrom": [
@@ -612,10 +849,19 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "achievement_progress_ach_achievement_id_user_id_period_id_pk": {
+          "name": "achievement_progress_ach_achievement_id_user_id_period_id_pk",
+          "columns": [
+            "ach_achievement_id",
+            "user_id",
+            "period_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
-    "user": {
+    "usr.user": {
       "name": "user",
       "schema": "usr",
       "columns": {
@@ -645,6 +891,27 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "external_id": {
           "name": "external_id",
@@ -679,8 +946,8 @@
         }
       }
     },
-    "usr_workout": {
-      "name": "usr_workout",
+    "usr.workout": {
+      "name": "workout",
       "schema": "usr",
       "columns": {
         "id": {
@@ -709,6 +976,27 @@
           "primaryKey": false,
           "notNull": true,
           "default": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
         },
         "user_id": {
           "name": "user_id",
@@ -769,6 +1057,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "achievement_processed_at": {
+          "name": "achievement_processed_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
@@ -804,9 +1098,9 @@
         }
       },
       "foreignKeys": {
-        "usr_workout_user_id_user_id_fk": {
-          "name": "usr_workout_user_id_user_id_fk",
-          "tableFrom": "usr_workout",
+        "workout_user_id_user_id_fk": {
+          "name": "workout_user_id_user_id_fk",
+          "tableFrom": "workout",
           "tableTo": "user",
           "schemaTo": "usr",
           "columnsFrom": [
@@ -818,9 +1112,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_workout_workout_type_id_workout_type_id_fk": {
-          "name": "usr_workout_workout_type_id_workout_type_id_fk",
-          "tableFrom": "usr_workout",
+        "workout_workout_type_id_workout_type_id_fk": {
+          "name": "workout_workout_type_id_workout_type_id_fk",
+          "tableFrom": "workout",
           "tableTo": "workout_type",
           "schemaTo": "wrk",
           "columnsFrom": [
@@ -832,9 +1126,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "usr_workout_period_id_period_id_fk": {
-          "name": "usr_workout_period_id_period_id_fk",
-          "tableFrom": "usr_workout",
+        "workout_period_id_period_id_fk": {
+          "name": "workout_period_id_period_id_fk",
+          "tableFrom": "workout",
           "tableTo": "period",
           "schemaTo": "cfg",
           "columnsFrom": [
@@ -849,8 +1143,8 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "usr_workout_external_id_unique": {
-          "name": "usr_workout_external_id_unique",
+        "workout_external_id_unique": {
+          "name": "workout_external_id_unique",
           "nullsNotDistinct": false,
           "columns": [
             "external_id"
@@ -858,7 +1152,7 @@
         }
       }
     },
-    "workout_type": {
+    "wrk.workout_type": {
       "name": "workout_type",
       "schema": "wrk",
       "columns": {
@@ -889,6 +1183,27 @@
           "notNull": true,
           "default": true
         },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": -1
+        },
         "name": {
           "name": "name",
           "type": "varchar(255)",
@@ -911,43 +1226,49 @@
     }
   },
   "enums": {
-    "frequency_condition": {
+    "ach.frequency_condition": {
       "name": "frequency_condition",
-      "values": {
-        "every": "every"
-      }
+      "schema": "ach",
+      "values": [
+        "every"
+      ]
     },
-    "frequency": {
+    "ach.frequency": {
       "name": "frequency",
-      "values": {
-        "day": "day",
-        "week": "week"
-      }
+      "schema": "ach",
+      "values": [
+        "day",
+        "week",
+        "month"
+      ]
     },
-    "workout_period_condition": {
+    "ach.workout_period_condition": {
       "name": "workout_period_condition",
-      "values": {
-        "sameDay": "sameDay",
-        "sameWeek": "sameWeek",
-        "sameMonth": "sameMonth",
-        "samePeriod": "samePeriod",
-        "singleSession": "singleSession"
-      }
+      "schema": "ach",
+      "values": [
+        "sameDay",
+        "sameWeek",
+        "sameMonth",
+        "samePeriod",
+        "singleSession"
+      ]
     },
-    "workout_type_condition": {
+    "ach.workout_type_condition": {
       "name": "workout_type_condition",
-      "values": {
-        "anyOf": "anyOf",
-        "allOf": "allOf",
-        "any": "any",
-        "exclusiveAny": "exclusiveAny",
-        "exclusiveAnyOf": "exclusiveAnyOf"
-      }
+      "schema": "ach",
+      "values": [
+        "anyOf",
+        "allOf",
+        "any",
+        "exclusiveAny",
+        "exclusiveAnyOf"
+      ]
     }
   },
   "schemas": {
     "ach": "ach",
     "cfg": "cfg",
+    "iam": "iam",
     "usr": "usr",
     "wrk": "wrk"
   },

@@ -9,11 +9,11 @@ export function getConnectionString(): string {
 }
 
 export default defineConfig({
+  dialect: 'postgresql',
   schema: './dist/studio.js',
   out: './migrations',
-  driver: 'pg',
   dbCredentials: {
-    connectionString: getConnectionString(),
+    url: getConnectionString(),
   },
   verbose: true,
 });

@@ -33,7 +33,7 @@ export const userRelations = relations(user, ({ many }) => ({
 }));
 
 export const achievement = schema.table(
-  'usr_achievement',
+  'achievement',
   {
     ...commonColumnsWithoutId,
     userId: integer('user_id')
@@ -74,7 +74,7 @@ export const achievementRelations = relations(achievement, ({ one }) => ({
 }));
 
 export const workout = schema.table(
-  'usr_workout',
+  'workout',
   {
     ...commonColumns,
     userId: integer('user_id')
@@ -127,7 +127,7 @@ export const workoutRelations = relations(workout, ({ one }) => ({
 }));
 
 export const achievementProgress = schema.table(
-  'usr_achievement_progress',
+  'achievement_progress',
   {
     ...commonColumnsWithoutId,
     quantity: smallint('quantity').notNull(),

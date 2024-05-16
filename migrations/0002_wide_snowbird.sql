@@ -1,1 +1,0 @@
-ALTER TYPE "frequency" ADD VALUE 'month';
