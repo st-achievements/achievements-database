@@ -1,3 +1,5 @@
+import { getAuthContext } from '@st-achievements/core';
+import { safe } from '@st-api/core';
 import camelcase from 'camelcase';
 import {
   boolean,
@@ -15,6 +17,11 @@ export type MetadataColumnType = Record<
   string | number | boolean | undefined | null
 >;
 
+function getUserIdFromContext(): number {
+  const [, auth] = safe(() => getAuthContext());
+  return auth?.userId ?? -1;
+}
+
 export const commonColumnsWithoutId = {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
@@ -23,9 +30,12 @@ export const commonColumnsWithoutId = {
     .$onUpdate(() => new Date()),
   active: boolean('active').default(true).notNull(),
   metadata: jsonb('metadata').$type<MetadataColumnType>().notNull().default({}),
-  // TODO use authorization context on created_by and updated_by when ready
-  createdBy: integer('created_by').notNull().default(-1),
-  updatedBy: integer('updated_by').notNull().default(-1),
+  createdBy: integer('created_by')
+    .notNull()
+    .$default(() => getUserIdFromContext()),
+  updatedBy: integer('updated_by')
+    .notNull()
+    .$default(() => getUserIdFromContext()),
 };
 
 export const commonColumns = {
