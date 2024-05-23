@@ -16,16 +16,16 @@ jobs:
           fetch-depth: 0
       - name: Prepare Google Application Credentials
         run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode > "${{ vars.GOOGLE_APPLICATION_CREDENTIALS }}"
-      - name: Install Node.JS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'pnpm'
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
         with:
           version: 9
+      - name: Install Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
       - name: Create .npmrc
         run: echo "${{ vars.NPMRC_CONTENT }}" > .npmrc
       - name: Login to Google Artifact Registry
