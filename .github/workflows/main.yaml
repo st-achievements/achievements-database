@@ -6,22 +6,32 @@ on:
 jobs:
   run-database-migrations:
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ vars.GOOGLE_APPLICATION_CREDENTIALS }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
+      - name: Prepare Google Application Credentials
+        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode > "${{ vars.GOOGLE_APPLICATION_CREDENTIALS }}"
       - name: Install Node.JS
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          cache: 'pnpm'
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
         with:
           version: 9
-          run_install: true
+      - name: Create .npmrc
+        run: echo "${{ vars.NPMRC_CONTENT }}" > .npmrc
+      - name: Login to Google Artifact Registry
+        run: pnpx google-artifactregistry-auth --repo-config=.npmrc --credential-config=.npmrc
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm migration:build
       - name: Run migrations
