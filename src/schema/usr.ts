@@ -33,7 +33,7 @@ export const userRelations = relations(user, ({ many }) => ({
 }));
 
 export const achievement = schema.table(
-  'achievement',
+  'achievement' as 'usr_achievement',
   {
     ...commonColumnsWithoutId,
     userId: integer('user_id')
