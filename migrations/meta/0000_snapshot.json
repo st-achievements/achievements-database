@@ -1,7 +1,7 @@
 {
-  "id": "919914d9-efd3-4edd-a713-ffac7dca0f9f",
+  "id": "64106e55-2482-4ce1-b3b7-5532386e1fd6",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "tables": {
     "ach.achievement": {
@@ -130,10 +130,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "achievement_level_id_level_id_fk": {
-          "name": "achievement_level_id_level_id_fk",
+        "achievement_level_id_ach_level_id_fk": {
+          "name": "achievement_level_id_ach_level_id_fk",
           "tableFrom": "achievement",
-          "tableTo": "level",
+          "tableTo": "ach_level",
           "schemaTo": "ach",
           "columnsFrom": [
             "level_id"
@@ -231,9 +231,17 @@
         "achievement_workout_type_achievement_id_index": {
           "name": "achievement_workout_type_achievement_id_index",
           "columns": [
-            "achievement_id"
+            {
+              "expression": "achievement_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -269,8 +277,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "ach.level": {
-      "name": "level",
+    "ach.ach_level": {
+      "name": "ach_level",
       "schema": "ach",
       "columns": {
         "id": {
@@ -408,10 +416,23 @@
         "period_start_at_end_at_index": {
           "name": "period_start_at_end_at_index",
           "columns": [
-            "start_at",
-            "end_at"
+            {
+              "expression": "start_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "end_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {},
@@ -571,9 +592,17 @@
         "api_key_user_id_index": {
           "name": "api_key_user_id_index",
           "columns": [
-            "user_id"
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -595,8 +624,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "usr.achievement": {
-      "name": "achievement",
+    "usr.usr_achievement": {
+      "name": "usr_achievement",
       "schema": "usr",
       "columns": {
         "created_at": {
@@ -671,16 +700,29 @@
         "usr_achievement_user_period_index": {
           "name": "usr_achievement_user_period_index",
           "columns": [
-            "user_id",
-            "period_id"
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "period_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
-        "achievement_user_id_user_id_fk": {
-          "name": "achievement_user_id_user_id_fk",
-          "tableFrom": "achievement",
+        "usr_achievement_user_id_user_id_fk": {
+          "name": "usr_achievement_user_id_user_id_fk",
+          "tableFrom": "usr_achievement",
           "tableTo": "user",
           "schemaTo": "usr",
           "columnsFrom": [
@@ -692,9 +734,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "achievement_ach_achievement_id_achievement_id_fk": {
-          "name": "achievement_ach_achievement_id_achievement_id_fk",
-          "tableFrom": "achievement",
+        "usr_achievement_ach_achievement_id_achievement_id_fk": {
+          "name": "usr_achievement_ach_achievement_id_achievement_id_fk",
+          "tableFrom": "usr_achievement",
           "tableTo": "achievement",
           "schemaTo": "ach",
           "columnsFrom": [
@@ -706,9 +748,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "achievement_period_id_period_id_fk": {
-          "name": "achievement_period_id_period_id_fk",
-          "tableFrom": "achievement",
+        "usr_achievement_period_id_period_id_fk": {
+          "name": "usr_achievement_period_id_period_id_fk",
+          "tableFrom": "usr_achievement",
           "tableTo": "period",
           "schemaTo": "cfg",
           "columnsFrom": [
@@ -722,8 +764,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "achievement_ach_achievement_id_user_id_period_id_pk": {
-          "name": "achievement_ach_achievement_id_user_id_period_id_pk",
+        "usr_achievement_ach_achievement_id_user_id_period_id_pk": {
+          "name": "usr_achievement_ach_achievement_id_user_id_period_id_pk",
           "columns": [
             "ach_achievement_id",
             "user_id",
@@ -946,8 +988,8 @@
         }
       }
     },
-    "usr.workout": {
-      "name": "workout",
+    "usr.usr_workout": {
+      "name": "usr_workout",
       "schema": "usr",
       "columns": {
         "id": {
@@ -1069,38 +1111,107 @@
         "usr_workout_user_period_workout_type_index": {
           "name": "usr_workout_user_period_workout_type_index",
           "columns": [
-            "user_id",
-            "period_id",
-            "workout_type_id"
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "period_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "workout_type_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "usr_workout_user_period_started_at_ended_at_index": {
           "name": "usr_workout_user_period_started_at_ended_at_index",
           "columns": [
-            "user_id",
-            "period_id",
-            "started_at",
-            "ended_at"
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "period_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "started_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ended_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "usr_workout_user_period_workout_type_started_at_ended_at_index": {
           "name": "usr_workout_user_period_workout_type_started_at_ended_at_index",
           "columns": [
-            "user_id",
-            "period_id",
-            "workout_type_id",
-            "started_at",
-            "ended_at"
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "period_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "workout_type_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "started_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ended_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
-        "workout_user_id_user_id_fk": {
-          "name": "workout_user_id_user_id_fk",
-          "tableFrom": "workout",
+        "usr_workout_user_id_user_id_fk": {
+          "name": "usr_workout_user_id_user_id_fk",
+          "tableFrom": "usr_workout",
           "tableTo": "user",
           "schemaTo": "usr",
           "columnsFrom": [
@@ -1112,9 +1223,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "workout_workout_type_id_workout_type_id_fk": {
-          "name": "workout_workout_type_id_workout_type_id_fk",
-          "tableFrom": "workout",
+        "usr_workout_workout_type_id_workout_type_id_fk": {
+          "name": "usr_workout_workout_type_id_workout_type_id_fk",
+          "tableFrom": "usr_workout",
           "tableTo": "workout_type",
           "schemaTo": "wrk",
           "columnsFrom": [
@@ -1126,9 +1237,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "workout_period_id_period_id_fk": {
-          "name": "workout_period_id_period_id_fk",
-          "tableFrom": "workout",
+        "usr_workout_period_id_period_id_fk": {
+          "name": "usr_workout_period_id_period_id_fk",
+          "tableFrom": "usr_workout",
           "tableTo": "period",
           "schemaTo": "cfg",
           "columnsFrom": [
@@ -1143,8 +1254,8 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "workout_external_id_unique": {
-          "name": "workout_external_id_unique",
+        "usr_workout_external_id_unique": {
+          "name": "usr_workout_external_id_unique",
           "nullsNotDistinct": false,
           "columns": [
             "external_id"

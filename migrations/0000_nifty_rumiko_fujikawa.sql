@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS "ach"."achievement_workout_type" (
 	"workout_type_id" integer NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "ach"."level" (
+CREATE TABLE IF NOT EXISTS "ach"."ach_level" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS "iam"."api_key" (
 	"user_id" integer NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "usr"."achievement" (
+CREATE TABLE IF NOT EXISTS "usr"."usr_achievement" (
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"active" boolean DEFAULT true NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS "usr"."achievement" (
 	"ach_achievement_id" integer NOT NULL,
 	"achieved_at" timestamp DEFAULT now() NOT NULL,
 	"period_id" integer NOT NULL,
-	CONSTRAINT "achievement_ach_achievement_id_user_id_period_id_pk" PRIMARY KEY("ach_achievement_id","user_id","period_id")
+	CONSTRAINT "usr_achievement_ach_achievement_id_user_id_period_id_pk" PRIMARY KEY("ach_achievement_id","user_id","period_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "usr"."achievement_progress" (
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS "usr"."user" (
 	CONSTRAINT "user_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "usr"."workout" (
+CREATE TABLE IF NOT EXISTS "usr"."usr_workout" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS "usr"."workout" (
 	"workout_name" varchar(255),
 	"period_id" integer NOT NULL,
 	"achievement_processed_at" timestamp,
-	CONSTRAINT "workout_external_id_unique" UNIQUE("external_id")
+	CONSTRAINT "usr_workout_external_id_unique" UNIQUE("external_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "wrk"."workout_type" (
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS "wrk"."workout_type" (
 );
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "ach"."achievement" ADD CONSTRAINT "achievement_level_id_level_id_fk" FOREIGN KEY ("level_id") REFERENCES "ach"."level"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "ach"."achievement" ADD CONSTRAINT "achievement_level_id_ach_level_id_fk" FOREIGN KEY ("level_id") REFERENCES "ach"."ach_level"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -222,19 +222,19 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."achievement" ADD CONSTRAINT "achievement_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "usr"."user"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_achievement" ADD CONSTRAINT "usr_achievement_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "usr"."user"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."achievement" ADD CONSTRAINT "achievement_ach_achievement_id_achievement_id_fk" FOREIGN KEY ("ach_achievement_id") REFERENCES "ach"."achievement"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_achievement" ADD CONSTRAINT "usr_achievement_ach_achievement_id_achievement_id_fk" FOREIGN KEY ("ach_achievement_id") REFERENCES "ach"."achievement"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."achievement" ADD CONSTRAINT "achievement_period_id_period_id_fk" FOREIGN KEY ("period_id") REFERENCES "cfg"."period"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_achievement" ADD CONSTRAINT "usr_achievement_period_id_period_id_fk" FOREIGN KEY ("period_id") REFERENCES "cfg"."period"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -258,27 +258,27 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."workout" ADD CONSTRAINT "workout_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "usr"."user"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_workout" ADD CONSTRAINT "usr_workout_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "usr"."user"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."workout" ADD CONSTRAINT "workout_workout_type_id_workout_type_id_fk" FOREIGN KEY ("workout_type_id") REFERENCES "wrk"."workout_type"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_workout" ADD CONSTRAINT "usr_workout_workout_type_id_workout_type_id_fk" FOREIGN KEY ("workout_type_id") REFERENCES "wrk"."workout_type"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "usr"."workout" ADD CONSTRAINT "workout_period_id_period_id_fk" FOREIGN KEY ("period_id") REFERENCES "cfg"."period"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "usr"."usr_workout" ADD CONSTRAINT "usr_workout_period_id_period_id_fk" FOREIGN KEY ("period_id") REFERENCES "cfg"."period"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "achievement_workout_type_achievement_id_index" ON "ach"."achievement_workout_type" ("achievement_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "period_start_at_end_at_index" ON "cfg"."period" ("start_at","end_at");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "api_key_user_id_index" ON "iam"."api_key" ("user_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "usr_achievement_user_period_index" ON "usr"."achievement" ("user_id","period_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "usr_workout_user_period_workout_type_index" ON "usr"."workout" ("user_id","period_id","workout_type_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "usr_workout_user_period_started_at_ended_at_index" ON "usr"."workout" ("user_id","period_id","started_at","ended_at");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "usr_workout_user_period_workout_type_started_at_ended_at_index" ON "usr"."workout" ("user_id","period_id","workout_type_id","started_at","ended_at");
+CREATE INDEX IF NOT EXISTS "achievement_workout_type_achievement_id_index" ON "ach"."achievement_workout_type" USING btree (achievement_id);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "period_start_at_end_at_index" ON "cfg"."period" USING btree (start_at,end_at);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "api_key_user_id_index" ON "iam"."api_key" USING btree (user_id);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "usr_achievement_user_period_index" ON "usr"."usr_achievement" USING btree (user_id,period_id);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "usr_workout_user_period_workout_type_index" ON "usr"."usr_workout" USING btree (user_id,period_id,workout_type_id);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "usr_workout_user_period_started_at_ended_at_index" ON "usr"."usr_workout" USING btree (user_id,period_id,started_at,ended_at);--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "usr_workout_user_period_workout_type_started_at_ended_at_index" ON "usr"."usr_workout" USING btree (user_id,period_id,workout_type_id,started_at,ended_at);

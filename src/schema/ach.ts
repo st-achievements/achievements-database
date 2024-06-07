@@ -118,7 +118,7 @@ export const achievementWorkoutTypeRelations = relations(
   }),
 );
 
-export const level = schema.table('level', {
+export const level = schema.table('ach_level', {
   ...commonColumns,
   name: varchar('name', { length: 255 }).notNull(),
   imageUrl: varchar('image_url', { length: 4000 }),

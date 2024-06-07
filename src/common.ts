@@ -1,5 +1,3 @@
-import { getAuthContext } from '@st-achievements/core';
-import { safe } from '@st-api/core';
 import camelcase from 'camelcase';
 import {
   boolean,
@@ -17,9 +15,24 @@ export type MetadataColumnType = Record<
   string | number | boolean | undefined | null
 >;
 
+export function __INTERNAL_SET_GET_USER_ID_FROM_CONTEXT(
+  callback: () => number | null | undefined,
+) {
+  GetUserIdFromContext.fn = callback;
+}
+
+const GetUserIdFromContext: { fn: () => number | null | undefined } = {
+  fn: () => -1,
+};
+
 function getUserIdFromContext(): number {
-  const [, auth] = safe(() => getAuthContext());
-  return auth?.userId ?? -1;
+  let userId;
+  try {
+    userId = GetUserIdFromContext.fn();
+  } catch {
+    /* empty */
+  }
+  return userId ?? -1;
 }
 
 export const commonColumnsWithoutId = {
@@ -32,10 +45,13 @@ export const commonColumnsWithoutId = {
   metadata: jsonb('metadata').$type<MetadataColumnType>().notNull().default({}),
   createdBy: integer('created_by')
     .notNull()
+    .default(-1)
     .$default(() => getUserIdFromContext()),
   updatedBy: integer('updated_by')
     .notNull()
-    .$default(() => getUserIdFromContext()),
+    .default(-1)
+    .$default(() => getUserIdFromContext())
+    .$onUpdate(() => getUserIdFromContext()),
 };
 
 export const commonColumns = {

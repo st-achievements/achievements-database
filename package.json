@@ -1,6 +1,6 @@
 {
   "name": "@st-achievements/database",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/st-achievements/achievements-database#readme",
@@ -31,7 +31,7 @@
   "scripts": {
     "build": "tsup",
     "migration:build": "node esbuild.config.js",
-    "migration:generate": "npm run migration:build && drizzle-kit generate",
+    "migration:generate": "drizzle-kit generate",
     "migration:push": "drizzle-kit push",
     "migration:run": "node dist/migration.js",
     "test": "vitest run",
@@ -47,25 +47,23 @@
   "devDependencies": {
     "@nestjs/common": "~10.3.9",
     "@nestjs/core": "~10.3.9",
-    "@st-achievements/core": "~1.2.1",
     "@st-api/config": "~1.2.0",
     "@st-api/core": "~5.0.0",
     "@st-api/firebase": "~5.5.0",
-    "@types/node": "~20.14.1",
+    "@types/node": "~20.14.2",
     "@types/pg": "~8.11.6",
     "@typescript-eslint/eslint-plugin": "~7.12.0",
     "@typescript-eslint/parser": "~7.12.0",
-    "drizzle-kit": "~0.21.4",
-    "drizzle-orm": "~0.30.10",
+    "drizzle-kit": "~0.22.2",
+    "drizzle-orm": "~0.31.1",
     "esbuild": "~0.21.4",
     "eslint": "~8.57.0",
     "eslint-import-resolver-typescript": "~3.6.0",
     "eslint-plugin-import": "~2.29.1",
     "eslint-plugin-unicorn": "~52.0.0",
-    "fast-glob": "~3.3.2",
     "firebase-functions": "~5.0.1",
-    "pg": "~8.11.5",
-    "prettier": "~3.3.0",
+    "pg": "~8.12.0",
+    "prettier": "~3.3.1",
     "rimraf": "~5.0.7",
     "tsup": "~8.1.0",
     "type-fest": "~4.19.0",
@@ -79,11 +77,10 @@
   "peerDependencies": {
     "@nestjs/common": "^10.3.8",
     "@nestjs/core": "^10.3.8",
-    "@st-achievements/core": "^1.1.0",
     "@st-api/core": "^5.0.0",
-    "@st-api/firebase": "^5.3.1",
-    "drizzle-orm": "^0.30.10",
+    "@st-api/firebase": "^5.5.0",
+    "drizzle-orm": "^0.31.1",
     "firebase-functions": "^5.0.1",
-    "pg": "^8.11.5"
+    "pg": "^8.12.0"
   }
 }

@@ -1,16 +1,25 @@
 import { build } from 'esbuild';
-import fastglob from 'fast-glob';
 import { rimraf } from 'rimraf';
+import { readFileSync } from 'node:fs';
 
 await rimraf('dist');
 
-const files = await fastglob('src/**/*.ts');
+/**
+ * @type {import('type-fest').PackageJson}
+ */
+const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+
+const externals = [
+  ...Object.keys(packageJson.dependencies),
+  ...Object.keys(packageJson.peerDependencies),
+];
 
 await build({
-  entryPoints: files,
-  bundle: false,
+  entryPoints: ['./src/schema/*', './src/migration.ts', './src/studio.ts'],
+  bundle: true,
   format: 'esm',
   minify: false,
   platform: 'node',
   outdir: 'dist',
+  external: externals,
 });
