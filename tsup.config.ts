@@ -6,7 +6,7 @@ export default defineConfig({
   entry: {
     index: './src/index.ts',
   },
-  dts: {
+  experimentalDts: {
     entry: {
       index: './src/index.ts',
     },
