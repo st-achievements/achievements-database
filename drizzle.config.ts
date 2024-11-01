@@ -16,4 +16,8 @@ export default defineConfig({
     url: getConnectionString(),
   },
   verbose: true,
+  casing: 'snake_case',
+  introspect: {
+    casing: 'camel',
+  },
 });

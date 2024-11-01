@@ -10,8 +10,8 @@ export const schema = pgSchema('cfg');
 
 export const quantityUnit = schema.table('quantity_unit', {
   ...commonColumns,
-  name: varchar('name', { length: 10 }).notNull().unique(),
-  description: varchar('description', { length: 255 }),
+  name: varchar({ length: 10 }).notNull().unique(),
+  description: varchar({ length: 255 }),
 });
 
 export const quantityUnitRelations = relations(quantityUnit, ({ many }) => ({
@@ -22,8 +22,8 @@ export const period = schema.table(
   'period',
   {
     ...commonColumns,
-    startAt: date('start_at').notNull(),
-    endAt: date('end_at').notNull(),
+    startAt: date().notNull(),
+    endAt: date().notNull(),
   },
   (table) => ({
     startAtEndAtIndex: index('period_start_at_end_at_index').on(
