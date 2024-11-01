@@ -1,6 +1,6 @@
 {
   "name": "@st-achievements/database",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/st-achievements/achievements-database#readme",
@@ -74,8 +74,8 @@
     "@st-api/core": "^6.0.0",
     "@st-api/firebase": "^6.0.0",
     "@stlmpp/di": "^0.4.0",
-    "drizzle-orm": "^0.35.0",
-    "firebase-functions": "^6.0.0",
+    "drizzle-orm": "^0.36.0",
+    "firebase-functions": "^6.1.0",
     "pg": "^8.13.0"
   }
 }
