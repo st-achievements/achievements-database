@@ -10,7 +10,7 @@ export const schema = pgSchema('wrk');
 
 export const workoutType = schema.table('workout_type', {
   ...commonColumns,
-  name: varchar('name', { length: 255 }).notNull().unique(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const workoutTypeRelations = relations(workoutType, ({ many }) => ({

@@ -51,25 +51,21 @@ export type FrequencyConditionType = PgEnumAsType<
 
 export const achievement = schema.table('achievement', {
   ...commonColumns,
-  name: varchar('name', { length: 255 }).notNull(),
-  description: varchar('description', { length: 5000 }),
-  imageUrl: varchar('image_url', { length: 4000 }),
-  levelId: integer('level_id')
+  name: varchar({ length: 255 }).notNull(),
+  description: varchar({ length: 5000 }),
+  imageUrl: varchar({ length: 4000 }),
+  levelId: integer()
     .references(() => level.id)
     .notNull(),
-  quantityNeeded: integer('quantity_needed').notNull(),
-  quantityUnitId: integer('quantity_unit_id')
+  quantityNeeded: integer().notNull(),
+  quantityUnitId: integer()
     .references(() => cfg.quantityUnit.id)
     .notNull(),
-  workoutTypeCondition: WorkoutTypeConditionEnum(
-    'workout_type_condition',
-  ).notNull(),
-  periodCondition: PeriodConditionEnum('period_condition').notNull(),
-  frequency: FrequencyEnum('frequency'),
-  frequencyCondition: FrequencyConditionEnum('frequency_condition'),
-  hasProgressTracking: boolean('has_progress_tracking')
-    .default(false)
-    .notNull(),
+  workoutTypeCondition: WorkoutTypeConditionEnum().notNull(),
+  periodCondition: PeriodConditionEnum().notNull(),
+  frequency: FrequencyEnum(),
+  frequencyCondition: FrequencyConditionEnum(),
+  hasProgressTracking: boolean().default(false).notNull(),
 });
 
 export const achievementRelations = relations(achievement, ({ one, many }) => ({
@@ -90,10 +86,10 @@ export const achievementWorkoutType = schema.table(
   'achievement_workout_type',
   {
     ...commonColumns,
-    achievementId: integer('achievement_id')
+    achievementId: integer()
       .references(() => achievement.id)
       .notNull(),
-    workoutTypeId: integer('workout_type_id')
+    workoutTypeId: integer()
       .references(() => wrk.workoutType.id)
       .notNull(),
   },
@@ -120,8 +116,8 @@ export const achievementWorkoutTypeRelations = relations(
 
 export const level = schema.table('ach_level', {
   ...commonColumns,
-  name: varchar('name', { length: 255 }).notNull(),
-  imageUrl: varchar('image_url', { length: 4000 }),
+  name: varchar({ length: 255 }).notNull(),
+  imageUrl: varchar({ length: 4000 }),
 });
 
 export const levelRelations = relations(level, ({ many }) => ({

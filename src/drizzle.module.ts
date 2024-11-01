@@ -36,6 +36,7 @@ export function provideDrizzle(): Provider[] {
       Drizzle,
       (client) =>
         drizzle(client, {
+          casing: 'snake_case',
           schema: allSchemas,
           logger: {
             logQuery: (query, params) =>

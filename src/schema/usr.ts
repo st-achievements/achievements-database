@@ -21,8 +21,8 @@ export const schema = pgSchema('usr');
 
 export const user = schema.table('user', {
   ...commonColumns,
-  externalId: varchar('external_id', { length: 255 }).unique(),
-  name: varchar('name', { length: 255 }).notNull().unique(),
+  externalId: varchar({ length: 255 }).unique(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const userRelations = relations(user, ({ many }) => ({
@@ -36,14 +36,14 @@ export const achievement = schema.table(
   'usr_achievement',
   {
     ...commonColumnsWithoutId,
-    userId: integer('user_id')
+    userId: integer()
       .references(() => user.id)
       .notNull(),
-    achAchievementId: integer('ach_achievement_id')
+    achAchievementId: integer()
       .references(() => ach.achievement.id)
       .notNull(),
-    achievedAt: timestamp('achieved_at').notNull().defaultNow(),
-    periodId: integer('period_id')
+    achievedAt: timestamp().notNull().defaultNow(),
+    periodId: integer()
       .references(() => cfg.period.id)
       .notNull(),
   },
@@ -77,20 +77,20 @@ export const workout = schema.table(
   'usr_workout',
   {
     ...commonColumns,
-    userId: integer('user_id')
+    userId: integer()
       .references(() => user.id)
       .notNull(),
-    workoutTypeId: integer('workout_type_id')
+    workoutTypeId: integer()
       .references(() => wrk.workoutType.id)
       .notNull(),
-    duration: doublePrecision('duration').notNull(),
-    startedAt: timestamp('started_at').notNull(),
-    endedAt: timestamp('ended_at').notNull(),
-    externalId: varchar('external_id', { length: 255 }).notNull().unique(),
-    distance: doublePrecision('distance'),
-    energyBurned: doublePrecision('energy_burned').notNull(),
-    workoutName: varchar('workout_name', { length: 255 }),
-    periodId: integer('period_id')
+    duration: doublePrecision().notNull(),
+    startedAt: timestamp().notNull(),
+    endedAt: timestamp().notNull(),
+    externalId: varchar({ length: 255 }).notNull().unique(),
+    distance: doublePrecision(),
+    energyBurned: doublePrecision().notNull(),
+    workoutName: varchar({ length: 255 }),
+    periodId: integer()
       .references(() => cfg.period.id)
       .notNull(),
     achievementProcessedAt: timestamp('achievement_processed_at'),
@@ -130,14 +130,14 @@ export const achievementProgress = schema.table(
   'achievement_progress',
   {
     ...commonColumnsWithoutId,
-    quantity: smallint('quantity').notNull(),
-    achAchievementId: integer('ach_achievement_id')
+    quantity: smallint().notNull(),
+    achAchievementId: integer()
       .references(() => ach.achievement.id)
       .notNull(),
-    userId: integer('user_id')
+    userId: integer()
       .references(() => user.id)
       .notNull(),
-    periodId: integer('period_id')
+    periodId: integer()
       .references(() => cfg.period.id)
       .notNull(),
   },
