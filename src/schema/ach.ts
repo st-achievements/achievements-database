@@ -93,11 +93,11 @@ export const achievementWorkoutType = schema.table(
       .references(() => wrk.workoutType.id)
       .notNull(),
   },
-  (table) => ({
-    achievementIdIndex: index(
-      'achievement_workout_type_achievement_id_index',
-    ).on(table.achievementId),
-  }),
+  (table) => [
+    index('achievement_workout_type_achievement_id_index').on(
+      table.achievementId,
+    ),
+  ],
 );
 
 export const achievementWorkoutTypeRelations = relations(

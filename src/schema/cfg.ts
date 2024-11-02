@@ -25,12 +25,9 @@ export const period = schema.table(
     startAt: date().notNull(),
     endAt: date().notNull(),
   },
-  (table) => ({
-    startAtEndAtIndex: index('period_start_at_end_at_index').on(
-      table.startAt,
-      table.endAt,
-    ),
-  }),
+  (table) => [
+    index('period_start_at_end_at_index').on(table.startAt, table.endAt),
+  ],
 );
 
 export const periodRelations = relations(period, ({ many }) => ({

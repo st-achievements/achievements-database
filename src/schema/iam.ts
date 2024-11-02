@@ -17,9 +17,7 @@ export const apiKey = schema.table(
       .references(() => usr.user.id)
       .notNull(),
   },
-  (table) => ({
-    userIdIndex: index('api_key_user_id_index').on(table.userId),
-  }),
+  (table) => [index('api_key_user_id_index').on(table.userId)],
 );
 
 export const apiKeyRelations = relations(apiKey, ({ one }) => ({

@@ -47,15 +47,12 @@ export const achievement = schema.table(
       .references(() => cfg.period.id)
       .notNull(),
   },
-  (table) => ({
-    userPeriodIndex: index('usr_achievement_user_period_index').on(
-      table.userId,
-      table.periodId,
-    ),
-    pk: primaryKey({
+  (table) => [
+    index('usr_achievement_user_period_index').on(table.userId, table.periodId),
+    primaryKey({
       columns: [table.achAchievementId, table.userId, table.periodId],
     }),
-  }),
+  ],
 );
 
 export const achievementRelations = relations(achievement, ({ one }) => ({
@@ -95,23 +92,26 @@ export const workout = schema.table(
       .notNull(),
     achievementProcessedAt: timestamp('achievement_processed_at'),
   },
-  (table) => ({
-    userPeriodWorkoutType: index(
-      'usr_workout_user_period_workout_type_index',
-    ).on(table.userId, table.periodId, table.workoutTypeId),
-    userPeriodStartedAtEndedAt: index(
-      'usr_workout_user_period_started_at_ended_at_index',
-    ).on(table.userId, table.periodId, table.startedAt, table.endedAt),
-    userPeriodWorkoutTypeStartedAtEndedAt: index(
-      'usr_workout_user_period_workout_type_started_at_ended_at_index',
-    ).on(
+  (table) => [
+    index('usr_workout_user_period_workout_type_index').on(
+      table.userId,
+      table.periodId,
+      table.workoutTypeId,
+    ),
+    index('usr_workout_user_period_started_at_ended_at_index').on(
+      table.userId,
+      table.periodId,
+      table.startedAt,
+      table.endedAt,
+    ),
+    index('usr_workout_user_period_workout_type_started_at_ended_at_index').on(
       table.userId,
       table.periodId,
       table.workoutTypeId,
       table.startedAt,
       table.endedAt,
     ),
-  }),
+  ],
 );
 
 export const workoutRelations = relations(workout, ({ one }) => ({
@@ -141,11 +141,11 @@ export const achievementProgress = schema.table(
       .references(() => cfg.period.id)
       .notNull(),
   },
-  (table) => ({
-    pk: primaryKey({
+  (table) => [
+    primaryKey({
       columns: [table.achAchievementId, table.userId, table.periodId],
     }),
-  }),
+  ],
 );
 
 export const achievementProgressRelations = relations(
