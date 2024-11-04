@@ -41,7 +41,7 @@ export const commonColumnsWithoutId = {
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
-  active: boolean('active').default(true).notNull(),
+  inactivatedAt: timestamp(),
   metadata: jsonb('metadata').$type<MetadataColumnType>().notNull().default({}),
   createdBy: integer('created_by')
     .notNull()
