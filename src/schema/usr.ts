@@ -52,10 +52,14 @@ export const achievement = schema.table(
     primaryKey({
       columns: [table.achAchievementId, table.userId, table.periodId],
     }),
+    index('usr_achievement_user_achievement_index').on(
+      table.userId,
+      table.achAchievementId,
+    ),
   ],
 );
 
-export const achievementRelations = relations(achievement, ({ one }) => ({
+export const achievementRelations = relations(achievement, ({ one, many }) => ({
   achAchievement: one(ach.achievement, {
     fields: [achievement.achAchievementId],
     references: [ach.achievement.id],
@@ -68,6 +72,7 @@ export const achievementRelations = relations(achievement, ({ one }) => ({
     fields: [achievement.periodId],
     references: [cfg.period.id],
   }),
+  usrAchievementProgress: many(achievementProgress),
 }));
 
 export const workout = schema.table(
@@ -145,6 +150,10 @@ export const achievementProgress = schema.table(
     primaryKey({
       columns: [table.achAchievementId, table.userId, table.periodId],
     }),
+    index('usr_achievement_progress_user_achievement_index').on(
+      table.userId,
+      table.achAchievementId,
+    ),
   ],
 );
 
@@ -162,6 +171,18 @@ export const achievementProgressRelations = relations(
     cfgPeriod: one(cfg.period, {
       fields: [achievementProgress.periodId],
       references: [cfg.period.id],
+    }),
+    usrAchievement: one(achievement, {
+      fields: [
+        achievementProgress.achAchievementId,
+        achievementProgress.userId,
+        achievementProgress.periodId,
+      ],
+      references: [
+        achievement.achAchievementId,
+        achievement.userId,
+        achievement.periodId,
+      ],
     }),
   }),
 );
