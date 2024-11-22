@@ -1,11 +1,9 @@
 import camelcase from 'camelcase';
 import {
-  boolean,
   integer,
   jsonb,
   type PgEnum,
   type PgSchema,
-  serial,
   timestamp,
 } from 'drizzle-orm/pg-core';
 import type { CamelCase, StringKeyOf } from 'type-fest';
@@ -55,7 +53,7 @@ export const commonColumnsWithoutId = {
 };
 
 export const commonColumns = {
-  id: serial('id').primaryKey(),
+  id: integer().primaryKey().generatedAlwaysAsIdentity({ startWith: 4096 }),
   ...commonColumnsWithoutId,
 } as const;
 

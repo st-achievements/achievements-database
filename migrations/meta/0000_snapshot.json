@@ -1,5 +1,5 @@
 {
-  "id": "64106e55-2482-4ce1-b3b7-5532386e1fd6",
+  "id": "e704dbbc-952f-41c6-9ac6-9504440eaa3b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,9 +10,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "achievement_id_seq",
+            "schema": "ach",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -28,12 +39,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -160,7 +170,10 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "ach.achievement_workout_type": {
       "name": "achievement_workout_type",
@@ -168,9 +181,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "achievement_workout_type_id_seq",
+            "schema": "ach",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -186,12 +210,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -275,7 +298,10 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "ach.ach_level": {
       "name": "ach_level",
@@ -283,9 +309,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "ach_level_id_seq",
+            "schema": "ach",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -301,12 +338,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -345,7 +381,10 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "cfg.period": {
       "name": "period",
@@ -353,9 +392,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "period_id_seq",
+            "schema": "cfg",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -371,12 +421,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -437,7 +486,10 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "cfg.quantity_unit": {
       "name": "quantity_unit",
@@ -445,9 +497,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "quantity_unit_id_seq",
+            "schema": "cfg",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -463,12 +526,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -515,7 +577,10 @@
             "name"
           ]
         }
-      }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "iam.api_key": {
       "name": "api_key",
@@ -523,9 +588,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "api_key_id_seq",
+            "schema": "iam",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -541,12 +617,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -603,6 +678,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "api_key_key_index": {
+          "name": "api_key_key_index",
+          "columns": [
+            {
+              "expression": "key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -622,7 +712,10 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "usr.usr_achievement": {
       "name": "usr_achievement",
@@ -642,12 +735,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -717,6 +809,27 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "usr_achievement_user_achievement_index": {
+          "name": "usr_achievement_user_achievement_index",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ach_achievement_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -773,7 +886,10 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "usr.achievement_progress": {
       "name": "achievement_progress",
@@ -793,12 +909,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -846,7 +961,29 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "usr_achievement_progress_user_achievement_index": {
+          "name": "usr_achievement_progress_user_achievement_index",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ach_achievement_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "achievement_progress_ach_achievement_id_achievement_id_fk": {
           "name": "achievement_progress_ach_achievement_id_achievement_id_fk",
@@ -901,7 +1038,10 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "usr.user": {
       "name": "user",
@@ -909,9 +1049,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "user_id_seq",
+            "schema": "usr",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -927,12 +1078,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -972,8 +1122,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "user_external_id_unique": {
-          "name": "user_external_id_unique",
+        "user_externalId_unique": {
+          "name": "user_externalId_unique",
           "nullsNotDistinct": false,
           "columns": [
             "external_id"
@@ -986,7 +1136,10 @@
             "name"
           ]
         }
-      }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "usr.usr_workout": {
       "name": "usr_workout",
@@ -994,9 +1147,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "usr_workout_id_seq",
+            "schema": "usr",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -1012,12 +1176,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -1254,14 +1417,17 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "usr_workout_external_id_unique": {
-          "name": "usr_workout_external_id_unique",
+        "usr_workout_externalId_unique": {
+          "name": "usr_workout_externalId_unique",
           "nullsNotDistinct": false,
           "columns": [
             "external_id"
           ]
         }
-      }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "wrk.workout_type": {
       "name": "workout_type",
@@ -1269,9 +1435,20 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "workout_type_id_seq",
+            "schema": "wrk",
+            "increment": "1",
+            "startWith": "4096",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
         "created_at": {
           "name": "created_at",
@@ -1287,12 +1464,11 @@
           "notNull": true,
           "default": "now()"
         },
-        "active": {
-          "name": "active",
-          "type": "boolean",
+        "inactivated_at": {
+          "name": "inactivated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": true
+          "notNull": false
         },
         "metadata": {
           "name": "metadata",
@@ -1333,7 +1509,10 @@
             "name"
           ]
         }
-      }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
@@ -1383,6 +1562,10 @@
     "usr": "usr",
     "wrk": "wrk"
   },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
   "_meta": {
     "columns": {},
     "schemas": {},

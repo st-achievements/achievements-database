@@ -1,2 +1,0 @@
-CREATE INDEX IF NOT EXISTS "usr_achievement_user_achievement_index" ON "usr"."usr_achievement" USING btree ("user_id","ach_achievement_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "usr_achievement_progress_user_achievement_index" ON "usr"."achievement_progress" USING btree ("user_id","ach_achievement_id");

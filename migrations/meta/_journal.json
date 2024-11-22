@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1717723844966,
-      "tag": "0000_nifty_rumiko_fujikawa",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1730433124186,
-      "tag": "0001_wonderful_karen_page",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1730686115587,
-      "tag": "0002_burly_sauron",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1731876668836,
-      "tag": "0003_windy_ben_grimm",
+      "when": 1732239857962,
+      "tag": "0000_burly_thena",
       "breakpoints": true
     }
   ]
