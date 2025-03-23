@@ -8,6 +8,13 @@
       "when": 1732239857962,
       "tag": "0000_burly_thena",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1742752192425,
+      "tag": "0001_bright_havok",
+      "breakpoints": true
     }
   ]
 }

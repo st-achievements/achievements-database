@@ -23,6 +23,7 @@ export const user = schema.table('user', {
   ...commonColumns,
   externalId: varchar({ length: 255 }).unique(),
   name: varchar({ length: 255 }).notNull().unique(),
+  timezone: varchar({ length: 255 }).notNull().default('UTC'),
 });
 
 export const userRelations = relations(user, ({ many }) => ({

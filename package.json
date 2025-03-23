@@ -1,6 +1,6 @@
 {
   "name": "@st-achievements/database",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/st-achievements/achievements-database#readme",
@@ -46,37 +46,36 @@
   },
   "devDependencies": {
     "@st-api/config": "~2.0.2",
-    "@st-api/core": "~6.1.0",
+    "@st-api/core": "~6.1.1",
     "@st-api/firebase": "~6.4.3",
     "@stlmpp/di": "~0.4.0",
     "@types/node": "~20.14.8",
     "@types/pg": "~8.11.11",
-    "drizzle-kit": "~0.30.4",
-    "drizzle-orm": "~0.39.2",
-    "esbuild": "~0.24.2",
-    "eslint": "~9.20.0",
-    "eslint-plugin-unicorn": "~56.0.1",
-    "firebase-functions": "~6.3.1",
-    "pg": "~8.13.1",
-    "prettier": "~3.4.2",
+    "drizzle-kit": "~0.30.5",
+    "drizzle-orm": "~0.41.0",
+    "esbuild": "~0.25.1",
+    "eslint": "~9.23.0",
+    "eslint-plugin-unicorn": "~57.0.0",
+    "firebase-functions": "~6.3.2",
+    "pg": "~8.14.1",
+    "prettier": "~3.5.3",
     "rimraf": "~6.0.1",
-    "tsup": "~8.3.6",
-    "type-fest": "~4.33.0",
-    "typescript": "~5.7.3",
-    "typescript-eslint": "~8.23.0",
+    "tsup": "~8.4.0",
+    "type-fest": "~4.37.0",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "~8.27.0",
     "vitest": "~2.1.5"
   },
   "engines": {
     "node": "20",
-    "pnpm": "^9.0.0"
+    "pnpm": "^9.0.0||^10.0.0"
   },
   "peerDependencies": {
     "@st-api/core": "^6.1.0",
     "@st-api/firebase": "^6.4.0",
     "@stlmpp/di": "^0.4.0",
-    "drizzle-orm": "^0.39.0",
+    "drizzle-orm": "^0.41.0",
     "firebase-functions": "^6.3.0",
-    "pg": "^8.13.0"
-  },
-  "packageManager": "pnpm@8.14.1+sha1.d039b38e0b20ad012ed548e44267b8d4c88b447a"
+    "pg": "^8.14.0"
+  }
 }
